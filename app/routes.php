@@ -6,6 +6,7 @@ use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use App\Controllers\DisplayAllMoviesController;
 use App\Controllers\DisplayMovieController;
+use App\Controllers\AddDirectorController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -31,4 +32,5 @@ return function (App $app) {
 
     $app->get('/movies/{id}', DisplayMovieController::class);
 
+    $app->post('/directors/add', AddDirectorController::class);
 };

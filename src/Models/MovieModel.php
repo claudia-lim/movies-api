@@ -30,5 +30,6 @@ class MovieModel
         return $query->fetch();
     }
 
-    }
+
+
 }
