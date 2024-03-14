@@ -11,7 +11,7 @@ class UserModel
     }
 
     public function getUserInfoById(int $id) {
-        $query = $this->db->prepare("SELECT `username`, `password`, `email` FROM `users` WHERE `id` = ?");
+        $query = $this->db->prepare("SELECT `id`, `username`, `email` FROM `users` WHERE `id` = ?");
         $query->execute([$id]);
         return $query->fetch();
     }
