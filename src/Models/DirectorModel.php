@@ -19,5 +19,6 @@ class DirectorModel
         $query = $this->db->prepare("INSERT INTO `directors` (name)
             VALUES (?)");
         $query->execute([$director]);
+        return $this->db->lastInsertId();
     }
 }

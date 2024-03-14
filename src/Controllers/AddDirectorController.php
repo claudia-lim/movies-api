@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Abstract\Controller;
 use App\Models\DirectorModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class AddDirectorController
+class AddDirectorController extends Controller
 {
     private DirectorModel $directorModel;
 
@@ -16,8 +17,7 @@ class AddDirectorController
 
 public function __invoke(RequestInterface $request, ResponseInterface $response, $args) {
         $input = $request->getParsedBody();
-        $this->directorModel->addDirector($input['name']);
-        $response->getBody()->write("successfully added new director");
-        return $response;
+        $data = ["success" => true, "msg" => "successfully added new director", "directorId" => $this->directorModel->addDirector($input['name'])];
+        return $this->respondWithJson($response, $data);
 }
 }
