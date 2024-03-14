@@ -16,17 +16,12 @@ class UserModel
         return $query->fetch();
     }
 
-    public function getUserIdByUsername(string $username) {
-        $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `username` = ?");
-        $query->execute([$username]);
+    public function getUserIdByUsernameOrEmail(string $username, string $email) {
+        $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `username` = :username OR `email` = :email");
+        $query->bindParam(':username', $username);
+        $query->bindParam(':email', $email);
+        $query->execute();
         return $query->fetch();
     }
-
-    public function getUserIdByEmail(string $email) {
-        $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `email` = ?");
-        $query->execute([$email]);
-        return $query->fetch();
-    }
-
 
 }
