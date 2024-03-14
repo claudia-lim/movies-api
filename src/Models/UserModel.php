@@ -19,7 +19,7 @@ class UserModel
     public function getUserIdByUsernameOrEmail(string $username, string $email) {
         $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `username` = :username OR `email` = :email");
         $query->bindParam(":username", $username);
-        $query->bindParam(":email", $username);
+        $query->bindParam(":email", $email);
         $query->execute();
         return $query->fetch();
     }

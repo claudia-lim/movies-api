@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
+use App\Controllers\DisplayAllLoggedMoviesController;
 use App\Controllers\DisplayAllMoviesController;
 use App\Controllers\DisplayMovieController;
 use App\Controllers\AddDirectorController;
@@ -24,6 +25,7 @@ return function (App $app) {
         return $response;
     });
 
+//built in from slim:
 //    $app->group('/users', function (Group $group) {
 //        $group->get('', ListUsersAction::class);
 //        $group->get('/{id}', ViewUserAction::class);
@@ -36,4 +38,6 @@ return function (App $app) {
     $app->post('/directors/add', AddDirectorController::class);
 
     $app->get('/users/{id}', GetUserController::class);
+
+    $app->get('/loggedmovies', DisplayAllLoggedMoviesController::class);
 };
