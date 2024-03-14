@@ -11,7 +11,7 @@ class DirectorModel
     }
     public function getDirectorId(string $dirName): int {
         $query = $this->db->prepare("SELECT `id` FROM `directors` WHERE `name`=?");
-        $query->execute($dirName);
+        $query->execute([$dirName]);
         return $query->fetch();
     }
 
