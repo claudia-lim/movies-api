@@ -3,11 +3,12 @@
 namespace App\Controllers;
 
 
+use App\Abstract\Controller;
 use App\Models\MovieModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class DisplayMovieController
+class DisplayMovieController extends Controller
 {
     private MovieModel $movieModel;
 
@@ -16,9 +17,8 @@ class DisplayMovieController
     }
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, $args) {
-        $data = json_encode($this->movieModel->displayMovieById($args['id']));
-        $response->getBody()->write($data);
-        return $response->withHeader('Content-Type', 'application/json');
+        $data = $this->movieModel->displayMovieById($args['id']);
+        return $this->respondWithJson($response, $data);
     }
 
 }
