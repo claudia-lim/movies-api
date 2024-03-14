@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Abstract\Controller;
 use App\Models\MovieModel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Views\PhpRenderer;
 
-class DisplayAllMoviesController
+class DisplayAllMoviesController extends Controller
 {
    private MovieModel $movieModel;
    public function __construct(MovieModel $movieModel, PhpRenderer $renderer) {
@@ -16,9 +17,8 @@ class DisplayAllMoviesController
    }
 
    public function __invoke(RequestInterface $request, ResponseInterface $response, $args) {
-       $data = json_encode($this->movieModel->displayAllMovies());
-       $response->getBody()->write($data);
-       return $response->withHeader('Content-Type', 'application/json');
+       $data = $this->movieModel->displayAllMovies();
+       return $this->respondWithJson($response, $data);
    }
 
 }
