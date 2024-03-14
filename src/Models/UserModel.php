@@ -15,4 +15,12 @@ class UserModel
         $query->execute([$id]);
         return $query->fetch();
     }
+
+    public function getuserIdByUsername(string $username) {
+        $query = $this->db->prepare("SELECT `id` FROM `users` WHERE `username` = ?");
+        $query->execute([$username]);
+        return $query->fetch();
+    }
+
+
 }
